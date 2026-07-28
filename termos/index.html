@@ -23,7 +23,7 @@
       max-width: 45rem;
       margin: 0 auto;
       padding: 2rem 1.5rem;
-      padding-top: 4rem;
+      padding-top: 5rem; /* Ajuste para não ficar escondido */
     }
     /* Cabeçalho e Menu */
     .cabecalho {
@@ -57,6 +57,19 @@
       font-size: 1.5rem;
       cursor: pointer;
     }
+    /* Botão Voltar */
+    .voltar {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--destaque);
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 2.5rem; /* Mais espaço e destaque */
+      font-size: 1.05rem;
+    }
+    .voltar i {font-size: 1.2rem;}
+    .voltar:hover {text-decoration: underline;}
     /* Menu Lateral */
     .menu-overlay {
       position: fixed;
@@ -121,34 +134,40 @@
     .menu-link i {
       margin-right: 0.5rem;
     }
-    /* Conteúdo da Página */
-    .voltar {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      color: var(--destaque);
-      text-decoration: none;
-      margin-bottom: 2rem;
-      font-weight: 500;
-    }
-    .voltar:hover {text-decoration: underline;}
+    /* Conteúdo */
     h1 {font-size: 2.3rem; font-weight: 800; margin-bottom: 0.5rem;}
     h1 em {font-style: italic; color: var(--destaque);}
-    .atualizacao {color: var(--texto-claro); font-size: 0.95rem; margin-bottom: 2rem; display: block;}
+    .atualizacao {color: var(--texto-claro); font-size: 0.95rem; margin-bottom: 2.5rem; display: block;}
     .toc {margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--borda);}
     .toc h2 {font-size: 1.2rem; margin-bottom: 1rem; color: var(--destaque);}
     .toc ul {list-style: none; padding-left: 0;}
-    .toc li {margin-bottom: 0.5rem;}
-    .toc a {color: var(--texto-claro); text-decoration: none; display: flex; align-items: center; gap: 0.4rem;}
+    .toc li {margin-bottom: 0.7rem;}
+    .toc a {color: var(--texto-claro); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; font-size: 1.05rem;}
     .toc a:hover {color: var(--destaque);}
     section {margin-bottom: 2.5rem;}
     section h2 {font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--destaque); display: flex; align-items: center; gap: 0.5rem;}
     section ul {padding-left: 1.5rem; margin: 1rem 0;}
     section li {margin-bottom: 0.7rem;}
     .destaque {background: rgba(249, 115, 22, 0.08); border-left: 3px solid var(--destaque); padding: 1rem; border-radius: 0.4rem; margin: 1rem 0; display: flex; align-items: flex-start; gap: 0.5rem;}
+    /* Contato com Ícones Coloridos */
     .contato {margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--borda);}
-    .contato a {color: var(--texto-claro); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0; padding: 0.3rem 0;}
+    .contato p {margin-bottom: 1rem; color: var(--texto-claro);}
+    .contato a {
+      color: var(--texto-claro);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin: 0.8rem 0;
+      padding: 0.5rem 0;
+      font-size: 1.05rem;
+    }
     .contato a:hover {color: var(--destaque);}
+    .contato a i {font-size: 1.4rem; width: 2rem; text-align: center;}
+    .contato .whatsapp i {color: #25d366;}
+    .contato .instagram i {color: #e4405f;}
+    .contato .pix i {color: #6366f1;}
+    .contato .canal i {color: var(--destaque);}
     footer {margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--borda); color: var(--texto-claro); font-size: 0.9rem; text-align: center;}
   </style>
 </head>
@@ -250,10 +269,10 @@
     <section id="contato" class="contato">
       <h2><i class="fas fa-headset"></i> 07. Contato</h2>
       <p>Para dúvidas, sugestões ou suporte técnico:</p>
-      <a href="https://wa.me/557597029009" target="_blank"><i class="fab fa-whatsapp"></i> Suporte — WhatsApp</a>
-      <a href="https://www.instagram.com/mg.zx7yy" target="_blank"><i class="fab fa-instagram"></i> Instagram — @mg.zx7yy</a>
-      <a href="https://pixgg.com/mgzinhomodz" target="_blank"><i class="fas fa-credit-card"></i> Alugar / Apoiar — pixgg.com/mgzinhomodz</a>
-      <a href="https://whatsapp.com/channel/0029Vb8Fo4Q3bbVBGI4Ke513" target="_blank"><i class="fas fa-bullhorn"></i> Canal WhatsApp — Yoshikawa ESM</a>
+      <a href="https://wa.me/557597029009" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i> Suporte — WhatsApp</a>
+      <a href="https://www.instagram.com/mg.zx7yy" target="_blank" class="instagram"><i class="fab fa-instagram"></i> Instagram — @mg.zx7yy</a>
+      <a href="https://pixgg.com/mgzinhomodz" target="_blank" class="pix"><i class="fas fa-credit-card"></i> Alugar / Apoiar — pixgg.com/mgzinhomodz</a>
+      <a href="https://whatsapp.com/channel/0029Vb8Fo4Q3bbVBGI4Ke513" target="_blank" class="canal"><i class="fas fa-bullhorn"></i> Canal WhatsApp — Yoshikawa ESM</a>
     </section>
 
     <section id="final">
@@ -278,5 +297,4 @@
     }
   </script>
 </body>
-  </html>
-  
+</html>
