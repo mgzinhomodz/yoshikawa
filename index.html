@@ -6,27 +6,32 @@
   <title>Yoshikawa ESM</title>
   <style>
     * {margin: 0; padding: 0; box-sizing: border-box;}
-    body {font-family: 'Segoe UI', system-ui, sans-serif; background-color: #0d0d12; color: #e4e4e7; line-height: 1.6; max-width: 42rem; margin: 0 auto; padding: 2rem 1.5rem;}
-    h1 {font-size: 2.25rem; font-weight: 800; margin-bottom: 0.5rem;}
+    body {font-family: 'Segoe UI', system-ui, sans-serif; background-color: #0d0d12; color: #e4e4e7; line-height: 1.7; max-width: 45rem; margin: 0 auto; padding: 2.5rem 1.5rem;}
+    h1 {font-size: 2.3rem; font-weight: 800; margin-bottom: 0.5rem;}
     h1 em {font-style: italic; color: #a5b4fc;}
-    .subtitle {color: #a1a1aa; font-size: 1.1rem; margin-bottom: 2rem;}
-    .actions {display: flex; gap: 1rem; margin-bottom: 3rem;}
-    .btn {background: #6366f1; color: white; padding: 0.65rem 1.25rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600; transition: background 0.2s;}
+    h2 {font-size: 1.5rem; font-weight: 700; margin: 3rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);}
+    h3 {font-size: 1.2rem; margin: 1.5rem 0 0.8rem; color: #c7d2fe;}
+    .subtitle {color: #a1a1aa; font-size: 1.1rem; margin-bottom: 2.5rem;}
+    .actions {display: flex; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap;}
+    .btn {background: #6366f1; color: white; padding: 0.7rem 1.4rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600; transition: background 0.2s;}
     .btn:hover {background: #4f46e5;}
     .link {color: #818cf8; text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 0.25rem;}
     .link:hover {text-decoration: underline;}
-    h2 {font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0.05em; color: #a1a1aa; margin: 3rem 0 1.25rem;}
-    .alert {background-color: rgba(250, 204, 21, 0.08); border-left: 3px solid #facc15; padding: 1rem; border-radius: 0.375rem; margin-bottom: 2rem; color: #e5e7eb;}
-    .plan {background-color: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1.25rem; transition: border-color 0.2s;}
+    .alert {background-color: rgba(250, 204, 21, 0.08); border-left: 3px solid #facc15; padding: 1.2rem; border-radius: 0.4rem; margin: 2rem 0; color: #e5e7eb;}
+    .plan {background-color: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.8rem; padding: 1.8rem; margin-bottom: 1.5rem; transition: border-color 0.2s;}
     .plan.fav {border-color: #22d3ee; background: radial-gradient(circle at top left, rgba(34,211,238,0.08), transparent 40%);}
-    .plan strong {display: block; font-size: 1.1rem; margin-bottom: 0.25rem;}
-    .price {font-size: 2rem; font-weight: 800; margin: 0.5rem 0;}
-    .desc {color: #a1a1aa; font-size: 0.95rem;}
+    .plan strong {display: block; font-size: 1.2rem; margin-bottom: 0.3rem;}
+    .price {font-size: 2.2rem; font-weight: 800; margin: 0.6rem 0; color: #22d3ee;}
+    .desc {color: #a1a1aa; font-size: 0.98rem;}
     .thanks {margin: 3rem 0; color: #a1a1aa; font-style: italic;}
-    .contacts {display: grid; gap: 0.75rem;}
-    .contacts a {color: #818cf8; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;}
-    .contacts a:hover {text-decoration: underline;}
-    footer {margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); color: #71717a; font-size: 0.9rem;}
+    .contacts, .terms-list {display: grid; gap: 0.8rem; margin: 1rem 0;}
+    .contacts a, .terms-list a {color: #818cf8; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;}
+    .contacts a:hover, .terms-list a:hover {text-decoration: underline;}
+    .terms-box {background: rgba(255,255,255,0.02); padding: 1.8rem; border-radius: 0.8rem; margin: 2rem 0;}
+    .terms-box ul {padding-left: 1.5rem; margin: 1rem 0;}
+    .terms-box li {margin-bottom: 0.7rem;}
+    footer {margin-top: 5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); color: #71717a; font-size: 0.9rem; text-align: center;}
+    .toc {display: flex; flex-direction: column; gap: 0.5rem; margin: 1.5rem 0; padding-left: 1rem;}
   </style>
 </head>
 <body>
@@ -35,39 +40,108 @@
     <h1>Automação completa<br>para o seu <em>grupo</em></h1>
     <p class="subtitle">Gerencie membros, faça figurinhas, baixe músicas, jogue jogos, utilize comandos VIP e mais outras 500 funções.</p>
     <div class="actions">
-      <a href="#contratar" class="btn">Alugar agora</a>
-      <a href="#planos" class="link">Ver planos ↓</a>
+      <a href="#planos" class="btn">Ver Planos</a>
+      <a href="#termos" class="link">Ler Termos de Uso ↓</a>
     </div>
   </header>
+
   <main>
-    <h2 id="planos">Planos disponíveis</h2>
-    <div class="alert">Após realizar o pagamento no valor do serviço escolhido, envie o comprovante para o suporte via WhatsApp. O acesso é liberado logo após a confirmação.</div>
+    <h2 id="planos">Planos Disponíveis</h2>
+    <div class="alert">
+      Após realizar o pagamento no valor do serviço escolhido, envie o comprovante para o suporte via WhatsApp. O acesso é liberado logo após a confirmação.
+    </div>
+
     <div class="plan fav">
-      <span style="color:#22d3ee; font-weight:700; font-size:0.8rem;">FAVORITO</span>
+      <span style="color:#22d3ee; font-weight:700; font-size:0.85rem;">FAVORITO</span>
       <strong>Aluguel do Bot</strong>
       <div class="price">R$ 14,99</div>
       <div class="desc">mensal<br>Adicione o bot em 1 grupo com VIP ilimitado para o contratante.</div>
     </div>
+
     <div class="plan">
-      <strong>Bot próprio</strong>
+      <strong>Bot Próprio</strong>
       <div class="price">R$ 24,99</div>
       <div class="desc">mensal<br>Conecte o bot a um número seu e adicione onde quiser, sendo dono completo.</div>
     </div>
+
     <div class="plan">
       <strong>Status VIP</strong>
       <div class="price">R$ 1,99</div>
       <div class="desc">mensal<br>Acesso a comandos e funções exclusivas via !menuvip.</div>
     </div>
+
     <div class="plan">
       <strong>500k Moedas</strong>
       <div class="price">R$ 1,00</div>
       <div class="desc">permanente<br>Quinhentas mil moedas adicionadas direto ao seu saldo em !moedas.</div>
     </div>
+
     <div class="thanks">
-      <h2>Obrigado por apoiar o projeto</h2>
-      <p>Cada apoio contribui diretamente para manter o bot ativo e em constante evolução. Isso significa muito para nós.</p>
+      <h2>Agradecimento</h2>
+      <p>Cada apoio contribui diretamente para manter o bot ativo e em constante evolução. Isso significa muito para nós!</p>
     </div>
-    <h2 id="contratar">Links e contato</h2>
+
+    <h2 id="termos">📝 Termos de Uso e Serviço</h2>
+    <p style="color:#a1a1aa; font-size:0.95rem;">Última atualização: 28 de julho de 2026</p>
+
+    <div class="toc">
+      <a href="#sistema">• Sobre o Sistema</a>
+      <a href="#aceitacao">• Aceitação dos Termos</a>
+      <a href="#botfilho">• Bot Próprio / Bot Filho</a>
+      <a href="#vip">• VIP, Planos e Pagamentos</a>
+      <a href="#responsabilidade">• Isenção de Responsabilidade</a>
+      <a href="#privacidade">• Propriedade e Privacidade</a>
+      <a href="#contato">• Contato e Suporte</a>
+      <a href="#final">• Disposições Finais</a>
+    </div>
+
+    <div class="terms-box">
+      <h3 id="sistema">01. Sobre o Sistema</h3>
+      <p>A Yoshikawa ESM é um bot multifuncional para WhatsApp, desenvolvido e mantido por @Mgzinho Modz, utilizando tecnologias autorizadas para automação.</p>
+      <p>O sistema recebe atualizações frequentes para melhorar funções e segurança. O uso em mensagens privadas só é permitido com contratação do plano de Bot Próprio.</p>
+
+      <h3 id="aceitacao">02. Aceitação dos Termos</h3>
+      <p>Ao contratar ou utilizar qualquer serviço da Yoshikawa ESM, você concorda integralmente com essas regras:</p>
+      <ul>
+        <li>Uso exclusivo para fins lícitos e em conformidade com as políticas do WhatsApp e legislação brasileira.</li>
+        <li>É proibido uso para spam, assédio, conteúdo ilegal, ofensivo ou violação de direitos de terceiros.</li>
+        <li>O usuário é totalmente responsável por todo conteúdo e interações realizadas através do bot.</li>
+        <li>Qualquer violação causará suspensão ou banimento imediato, sem direito a reembolso.</li>
+      </ul>
+
+      <h3 id="botfilho">03. Bot Próprio / Bot Filho</h3>
+      <p>Ao contratar o plano de Bot Próprio, você recebe acesso ao sistema para conectar ao seu número de telefone.</p>
+      <p><strong>Responsabilidade:</strong> O contratante é o único responsável pelo uso, configuração e atividades realizadas no bot conectado ao seu número. Não nos responsabilizamos por bloqueios, suspensões ou penalidades do WhatsApp decorrentes do uso indevido.</p>
+
+      <h3 id="vip">04. VIP, Planos e Pagamentos</h3>
+      <p>Todos os planos de aluguel e VIP são mensais, com renovação automática ou manual conforme escolha do usuário. Valores e benefícios podem ser alterados com aviso prévio de 7 dias.</p>
+      <p>Pagamentos são processados via Pixgg, e o acesso é liberado após confirmação do comprovante. Não há reembolso após ativação do serviço, por se tratar de produto digital.</p>
+
+      <h3 id="responsabilidade">05. Isenção de Responsabilidade</h3>
+      <p>Nós garantimos o funcionamento do sistema original, mas não nos responsabilizamos por:</p>
+      <ul>
+        <li>Uso indevido ou configurações incorretas feitas pelo usuário.</li>
+        <li>Conteúdo enviado, recebido ou compartilhado através do bot.</li>
+        <li>Problemas, bloqueios ou alterações nas políticas do WhatsApp.</li>
+        <li>Danos diretos ou indiretos, lucros cessantes ou perdas decorrentes do uso do serviço.</li>
+      </ul>
+
+      <h3 id="privacidade">06. Propriedade e Privacidade</h3>
+      <p>Todo o código, design e funcionalidades são propriedade exclusiva do desenvolvedor. Não é permitido copiar, modificar ou revender o sistema sem autorização escrita.</p>
+      <p>Processamos apenas dados mínimos e temporários para execução dos comandos, em conformidade com a LGPD. Não armazenamos conversas ou dados pessoais por tempo indeterminado.</p>
+
+      <h3 id="contato">07. Contato e Suporte</h3>
+      <p>Para dúvidas, suporte ou solicitações:</p>
+      <div class="contacts">
+        <a href="https://wa.me/557597029009" target="_blank">💬 WhatsApp Suporte: +55 75 9702-9009</a>
+        <a href="https://www.instagram.com/mg.zx7yy" target="_blank">📸 Instagram: @mg.zx7yy</a>
+      </div>
+
+      <h3 id="final">08. Disposições Finais</h3>
+      <p>Esses termos substituem qualquer acordo anterior. Dúvidas não previstas aqui serão resolvidas diretamente com o suporte.</p>
+    </div>
+
+    <h2>Links e Contato Oficial</h2>
     <div class="contacts">
       <a href="https://wa.me/557597029009" target="_blank">💬 Suporte — dúvidas, sugestões, aluguel e mais</a>
       <a href="https://pixgg.com/mgzinhomodz" target="_blank">💳 Alugar / Apoiar — pixgg.com/mgzinhomodz</a>
@@ -79,6 +153,10 @@
       <a href="https://akyronhost.com/?ref=VYTAYZDB" target="_blank">⚙️ Host Oficial</a>
     </div>
   </main>
-  <footer>© 2026 Yoshikawa ESM<br>@Mgzinho Modz — Todos os direitos reservados</footer>
+
+  <footer>
+    © 2026 Yoshikawa ESM<br>
+    Desenvolvido por @Mgzinho Modz — Todos os direitos reservados
+  </footer>
 </body>
 </html>
