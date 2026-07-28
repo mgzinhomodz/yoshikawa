@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yoshikawa ESM</title>
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {font-family: 'Segoe UI', system-ui, sans-serif; background-color: #0d0d12; color: #e4e4e7; line-height: 1.6; max-width: 42rem; margin: 0 auto; padding: 2rem 1.5rem;}
+    h1 {font-size: 2.25rem; font-weight: 800; margin-bottom: 0.5rem;}
+    h1 em {font-style: italic; color: #a5b4fc;}
+    .subtitle {color: #a1a1aa; font-size: 1.1rem; margin-bottom: 2rem;}
+    .actions {display: flex; gap: 1rem; margin-bottom: 3rem;}
+    .btn {background: #6366f1; color: white; padding: 0.65rem 1.25rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600; transition: background 0.2s;}
+    .btn:hover {background: #4f46e5;}
+    .link {color: #818cf8; text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 0.25rem;}
+    .link:hover {text-decoration: underline;}
+    h2 {font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0.05em; color: #a1a1aa; margin: 3rem 0 1.25rem;}
+    .alert {background-color: rgba(250, 204, 21, 0.08); border-left: 3px solid #facc15; padding: 1rem; border-radius: 0.375rem; margin-bottom: 2rem; color: #e5e7eb;}
+    .plan {background-color: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1.25rem; transition: border-color 0.2s;}
+    .plan.fav {border-color: #22d3ee; background: radial-gradient(circle at top left, rgba(34,211,238,0.08), transparent 40%);}
+    .plan strong {display: block; font-size: 1.1rem; margin-bottom: 0.25rem;}
+    .price {font-size: 2rem; font-weight: 800; margin: 0.5rem 0;}
+    .desc {color: #a1a1aa; font-size: 0.95rem;}
+    .thanks {margin: 3rem 0; color: #a1a1aa; font-style: italic;}
+    .contacts {display: grid; gap: 0.75rem;}
+    .contacts a {color: #818cf8; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;}
+    .contacts a:hover {text-decoration: underline;}
+    footer {margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); color: #71717a; font-size: 0.9rem;}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Yoshikawa ESM</h1>
+    <h1>Automação completa<br>para o seu <em>grupo</em></h1>
+    <p class="subtitle">Gerencie membros, faça figurinhas, baixe músicas, jogue jogos, utilize comandos VIP e mais outras 500 funções.</p>
+    <div class="actions">
+      <a href="#contratar" class="btn">Alugar agora</a>
+      <a href="#planos" class="link">Ver planos ↓</a>
+    </div>
+  </header>
+  <main>
+    <h2 id="planos">Planos disponíveis</h2>
+    <div class="alert">Após realizar o pagamento no valor do serviço escolhido, envie o comprovante para o suporte via WhatsApp. O acesso é liberado logo após a confirmação.</div>
+    <div class="plan fav">
+      <span style="color:#22d3ee; font-weight:700; font-size:0.8rem;">FAVORITO</span>
+      <strong>Aluguel do Bot</strong>
+      <div class="price">R$ 14,99</div>
+      <div class="desc">mensal<br>Adicione o bot em 1 grupo com VIP ilimitado para o contratante.</div>
+    </div>
+    <div class="plan">
+      <strong>Bot próprio</strong>
+      <div class="price">R$ 24,99</div>
+      <div class="desc">mensal<br>Conecte o bot a um número seu e adicione onde quiser, sendo dono completo.</div>
+    </div>
+    <div class="plan">
+      <strong>Status VIP</strong>
+      <div class="price">R$ 1,99</div>
+      <div class="desc">mensal<br>Acesso a comandos e funções exclusivas via !menuvip.</div>
+    </div>
+    <div class="plan">
+      <strong>500k Moedas</strong>
+      <div class="price">R$ 1,00</div>
+      <div class="desc">permanente<br>Quinhentas mil moedas adicionadas direto ao seu saldo em !moedas.</div>
+    </div>
+    <div class="thanks">
+      <h2>Obrigado por apoiar o projeto</h2>
+      <p>Cada apoio contribui diretamente para manter o bot ativo e em constante evolução. Isso significa muito para nós.</p>
+    </div>
+    <h2 id="contratar">Links e contato</h2>
+    <div class="contacts">
+      <a href="https://wa.me/557597029009" target="_blank">💬 Suporte — dúvidas, sugestões, aluguel e mais</a>
+      <a href="https://pixgg.com/mgzinhomodz" target="_blank">💳 Alugar / Apoiar — pixgg.com/mgzinhomodz</a>
+      <a href="https://www.instagram.com/mg.zx7yy" target="_blank">📸 Instagram — @mg.zx7yy</a>
+      <a href="https://github.com/mgzinhomodz" target="_blank">🐙 GitHub — mgzinhomodz</a>
+      <a href="https://whatsapp.com/channel/0029Vb8Fo4Q3bbVBGI4Ke513" target="_blank">📢 Canal WhatsApp — Yoshikawa ESM</a>
+      <a href="https://chat.whatsapp.com/HREzVen5dbdCkb1rXrj6Zb" target="_blank">👥 Grupo Oficial</a>
+      <a href="https://yoshikawa.vercel.app/" target="_blank">🎬 Yoshikawa Streaming</a>
+      <a href="https://akyronhost.com/?ref=VYTAYZDB" target="_blank">⚙️ Host Oficial</a>
+    </div>
+  </main>
+  <footer>© 2026 Yoshikawa ESM<br>@Mgzinho Modz — Todos os direitos reservados</footer>
+</body>
+</html>
