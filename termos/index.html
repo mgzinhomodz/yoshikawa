@@ -8,12 +8,12 @@
   <style>
     * {margin: 0; padding: 0; box-sizing: border-box;}
     :root {
-      --fundo: #18181b;
-      --fundo-card: #27272a;
-      --texto: #f4f4f5;
-      --texto-claro: #a1a1aa;
-      --destaque: #f97316;
-      --borda: #3f3f46;
+      --fundo: #120D1C;          /* Roxo muito escuro */
+      --fundo-card: #1E162F;     /* Roxo escuro para caixas */
+      --texto: #f4f4f5;          /* Branco */
+      --texto-claro: #A88FC9;    /* Roxo suave */
+      --destaque: #C084FC;       /* Roxo vibrante no lugar do laranja */
+      --borda: #3B2E52;          /* Roxo escuro para bordas */
     }
     body {
       font-family: 'Segoe UI', system-ui, sans-serif;
@@ -23,7 +23,7 @@
       max-width: 45rem;
       margin: 0 auto;
       padding: 2rem 1.5rem;
-      padding-top: 5rem; /* Ajuste para não ficar escondido */
+      padding-top: 5rem;
     }
     /* Cabeçalho e Menu */
     .cabecalho {
@@ -46,9 +46,10 @@
     .logo {
       font-size: 1.5rem;
       font-weight: 800;
+      color: var(--texto); /* Yoshikawa BRANCO */
     }
     .logo span {
-      color: var(--destaque);
+      color: var(--destaque); /* ESM ROXO */
     }
     .botao-menu {
       background: none;
@@ -65,7 +66,7 @@
       color: var(--destaque);
       text-decoration: none;
       font-weight: 600;
-      margin-bottom: 2.5rem; /* Mais espaço e destaque */
+      margin-bottom: 2.5rem;
       font-size: 1.05rem;
     }
     .voltar i {font-size: 1.2rem;}
@@ -128,7 +129,7 @@
       transition: 0.2s;
     }
     .menu-link:hover, .menu-link.ativo {
-      background: rgba(249, 115, 22, 0.1);
+      background: rgba(192, 132, 252, 0.1);
       color: var(--destaque);
     }
     .menu-link i {
@@ -148,7 +149,7 @@
     section h2 {font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--destaque); display: flex; align-items: center; gap: 0.5rem;}
     section ul {padding-left: 1.5rem; margin: 1rem 0;}
     section li {margin-bottom: 0.7rem;}
-    .destaque {background: rgba(249, 115, 22, 0.08); border-left: 3px solid var(--destaque); padding: 1rem; border-radius: 0.4rem; margin: 1rem 0; display: flex; align-items: flex-start; gap: 0.5rem;}
+    .destaque {background: rgba(192, 132, 252, 0.08); border-left: 3px solid var(--destaque); padding: 1rem; border-radius: 0.4rem; margin: 1rem 0; display: flex; align-items: flex-start; gap: 0.5rem;}
     /* Contato com Ícones Coloridos */
     .contato {margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--borda);}
     .contato p {margin-bottom: 1rem; color: var(--texto-claro);}
@@ -166,7 +167,7 @@
     .contato a i {font-size: 1.4rem; width: 2rem; text-align: center;}
     .contato .whatsapp i {color: #25d366;}
     .contato .instagram i {color: #e4405f;}
-    .contato .pix i {color: #6366f1;}
+    .contato .pix i {color: #8B5CF6;}
     .contato .canal i {color: var(--destaque);}
     footer {margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--borda); color: var(--texto-claro); font-size: 0.9rem; text-align: center;}
   </style>
@@ -297,4 +298,5 @@
     }
   </script>
 </body>
-</html>
+              </html>
+              
