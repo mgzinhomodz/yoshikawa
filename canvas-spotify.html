@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas Spotify</title>
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;}
+    body {
+      width: 400px;
+      height: 600px;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    /* Moldura exata do Spotify */
+    .player {
+      width: 380px;
+      height: 580px;
+      background: #181818;
+      border-radius: 24px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    /* Cabeçalho com perfil */
+    .cabecalho {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .foto-perfil {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: none;
+    }
+    .info-usuario {
+      display: flex;
+      flex-direction: column;
+    }
+    .nome-artista {
+      color: #FFFFFF; /* Branco puro */
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .usuario {
+      color: #B3B3B3; /* Cinza padrão do Spotify */
+      font-size: 13px;
+    }
+    /* Área da Capa */
+    .capa-container {
+      flex: 1;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .capa {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    /* Barra de Progresso */
+    .progresso {
+      margin-bottom: 12px;
+    }
+    .barra {
+      width: 100%;
+      height: 4px;
+      background: #404040;
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+    .preenchimento {
+      width: 40%;
+      height: 100%;
+      background: #FFFFFF; /* Branco igual ao Spotify */
+      border-radius: 2px;
+    }
+    .tempos {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #B3B3B3;
+    }
+    /* Botões de Controle */
+    .controles {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 16px 0;
+    }
+    .btn {
+      background: none;
+      border: none;
+      color: #FFFFFF;
+      font-size: 22px;
+      cursor: default;
+    }
+    .btn.play {
+      font-size: 30px;
+    }
+    /* Barra de Volume */
+    .volume {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .volume i {
+      color: #B3B3B3;
+      font-size: 14px;
+    }
+    .barra-volume {
+      flex: 1;
+      height: 4px;
+      background: #404040;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .nivel-volume {
+      width: 60%;
+      height: 100%;
+      background: #FFFFFF;
+      border-radius: 2px;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="player">
+    <!-- Cabeçalho -->
+    <div class="cabecalho">
+      <img src="https://yoshikawa-bot.github.io/cache/images/f43a1e86.jpg" alt="Perfil" class="foto-perfil">
+      <div class="info-usuario">
+        <div class="nome-artista" id="nomeArtista">Nome da Música</div>
+        <div class="usuario">@Mgzinho Modz</div>
+      </div>
+    </div>
+
+    <!-- Capa da Música -->
+    <div class="capa-container">
+      <img id="capaMusica" src="https://i.imgur.com/5b8ZkLg.png" alt="Capa" class="capa">
+    </div>
+
+    <!-- Tempo -->
+    <div class="progresso">
+      <div class="barra">
+        <div class="preenchimento"></div>
+      </div>
+      <div class="tempos">
+        <span id="tempoAtual">0:00</span>
+        <span id="tempoTotal">-3:00</span>
+      </div>
+    </div>
+
+    <!-- Controles -->
+    <div class="controles">
+      <button class="btn"><i class="fas fa-step-backward"></i></button>
+      <button class="btn play"><i class="fas fa-play"></i></button>
+      <button class="btn"><i class="fas fa-step-forward"></i></button>
+    </div>
+
+    <!-- Volume -->
+    <div class="volume">
+      <i class="fas fa-volume-down"></i>
+      <div class="barra-volume">
+        <div class="nivel-volume"></div>
+      </div>
+      <i class="fas fa-volume-up"></i>
+    </div>
+  </div>
+
+  <script>
+    // Pega os dados automaticamente da URL
+    const params = new URLSearchParams(window.location.search)
+    document.getElementById('nomeArtista').textContent = params.get('titulo') || 'Música'
+    document.getElementById('capaMusica').src = params.get('capa') || 'https://i.imgur.com/5b8ZkLg.png'
+    document.getElementById('tempoAtual').textContent = params.get('atual') || '1:26'
+    document.getElementById('tempoTotal').textContent = `-${params.get('restante') || '3:04'}`
+  </script>
+</body>
+        </html>
+        
