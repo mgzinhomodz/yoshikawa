@@ -8,12 +8,12 @@
   <style>
     * {margin: 0; padding: 0; box-sizing: border-box;}
     :root {
-      --fundo: #18181b;
-      --fundo-card: #27272a;
-      --texto: #f4f4f5;
-      --texto-claro: #a1a1aa;
-      --destaque: #f97316; /* Laranja original */
-      --borda: #3f3f46;
+      --fundo: #120D1C;          /* Roxo muito escuro no lugar do cinza */
+      --fundo-card: #1E162F;     /* Roxo escuro para caixas */
+      --texto: #f4f4f5;          /* Mantido branco */
+      --texto-claro: #A88FC9;    /* Roxo suave para textos secundários */
+      --destaque: #C084FC;       /* Roxo vibrante no lugar do laranja */
+      --borda: #3B2E52;          /* Roxo escuro para bordas */
     }
     body {
       font-family: 'Segoe UI', system-ui, sans-serif;
@@ -46,9 +46,10 @@
     .logo {
       font-size: 1.5rem;
       font-weight: 800;
+      color: var(--texto); /* Yoshikawa fica BRANCO */
     }
     .logo span {
-      color: var(--destaque);
+      color: var(--destaque); /* ESM fica ROXO */
     }
     .botao-menu {
       background: none;
@@ -115,7 +116,7 @@
       transition: 0.2s;
     }
     .menu-link:hover, .menu-link.ativo {
-      background: rgba(249, 115, 22, 0.1);
+      background: rgba(192, 132, 252, 0.1);
       color: var(--destaque);
     }
     .menu-link i {
@@ -128,7 +129,7 @@
     .actions {display: flex; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap;}
     .btn {
       background: var(--destaque);
-      color: white;
+      color: #120D1C;
       padding: 0.7rem 1.4rem;
       border-radius: 0.5rem;
       text-decoration: none;
@@ -138,7 +139,7 @@
       align-items: center;
       gap: 0.5rem;
     }
-    .btn:hover {background: #ea580c;}
+    .btn:hover {background: #A855F7;}
     .link {
       color: var(--destaque);
       text-decoration: none;
@@ -150,7 +151,7 @@
     .link:hover {text-decoration: underline;}
     h2 {font-size: 1.3rem; font-weight: 700; margin: 3rem 0 1.2rem; color: var(--texto);}
     .alert {
-      background: rgba(249, 115, 22, 0.08);
+      background: rgba(192, 132, 252, 0.08);
       border-left: 3px solid var(--destaque);
       padding: 1rem;
       border-radius: 0.5rem;
@@ -168,7 +169,7 @@
     .price + span {color: var(--destaque); font-size: 0.9rem; text-transform: lowercase;}
     .desc {color: var(--texto-claro); font-size: 0.95rem; margin-top: 0.5rem;}
     .apoio {
-      background: rgba(249, 115, 22, 0.1);
+      background: rgba(192, 132, 252, 0.1);
       border-radius: 0.75rem;
       padding: 2rem;
       margin: 3rem 0;
@@ -201,10 +202,10 @@
     .link-card .texto span:first-child {font-weight: 600; font-size: 1rem;}
     .link-card .texto span:last-child {font-size: 0.85rem; color: var(--texto-claro);}
     .link-whatsapp i {color: #25d366;}
-    .link-pix i {color: #6366f1;}
-    .link-instagram i {color: #e4405f;}
+    .link-pix i {color: #8B5CF6;}
+    .link-instagram i {color: #E4405F;}
     .link-github i {color: #f4f4f5;}
-    .link-youtube i {color: #ff0000;}
+    .link-youtube i {color: #FF0000;}
     footer {
       margin-top: 4rem;
       padding-top: 2rem;
