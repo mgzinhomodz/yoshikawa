@@ -1,345 +1,802 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Yoshikawa ESM</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yoshikawa ESM · Bot para WhatsApp</title>
   <style>
-    * {margin: 0; padding: 0; box-sizing: border-box;}
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     :root {
-      --fundo: #120D1C;          /* Roxo muito escuro no lugar do cinza */
-      --fundo-card: #1E162F;     /* Roxo escuro para caixas */
-      --texto: #f4f4f5;          /* Mantido branco */
-      --texto-claro: #A88FC9;    /* Roxo suave para textos secundários */
-      --destaque: #C084FC;       /* Roxo vibrante no lugar do laranja */
-      --borda: #3B2E52;          /* Roxo escuro para bordas */
+      color-scheme: light;
+
+      --bg:            #262624;
+      --bg-raised:     #1F1E1C;
+      --bg-card:       #30302E;
+      --bg-card-hover: #383734;
+
+      --text:           #FAF9F5;
+      --text-muted:     #9D9A93;
+      --text-dark:      #1a1915;
+      --text-btn-hover: #d4cfc0;
+      --text-dim:       rgba(232, 227, 213, 0.45);
+      --text-ghost:     rgba(232, 227, 213, 0.22);
+      --text-faint:     rgba(232, 227, 213, 0.38);
+      --text-pale:      rgba(232, 227, 213, 0.6);
+
+      --accent:          #DB7757;
+      --accent-bg:       rgba(219, 119, 87, 0.12);
+      --accent-bg-hover: rgba(219, 119, 87, 0.2);
+
+      --border:      rgba(232, 227, 213, 0.08);
+      --border-nav:  rgba(232, 227, 213, 0.1);
+      --border-btn:  rgba(232, 227, 213, 0.3);
+      --hover-bg:    rgba(232, 227, 213, 0.07);
     }
-    body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background-color: var(--fundo);
-      color: var(--texto);
-      line-height: 1.6;
-      max-width: 45rem;
-      margin: 0 auto;
-      padding: 2rem 1.5rem;
-      padding-top: 4rem;
+
+    html {
+      scroll-behavior: smooth;
     }
-    /* Cabeçalho e Menu */
-    .cabecalho {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: var(--fundo);
-      padding: 1rem 1.5rem;
-      border-bottom: 1px solid var(--borda);
-      z-index: 100;
+
+    .page {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      padding: 0 0 3rem;
     }
-    .cabecalho-conteudo {
-      max-width: 45rem;
-      margin: 0 auto;
+
+    .nav {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-    }
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--texto); /* Yoshikawa fica BRANCO */
-    }
-    .logo span {
-      color: var(--destaque); /* ESM fica ROXO */
-    }
-    .botao-menu {
-      background: none;
-      border: none;
-      color: var(--texto);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-    /* Menu Lateral */
-    .menu-overlay {
-      position: fixed;
+      justify-content: space-between;
+      padding: 1.1rem 2rem;
+      border-bottom: 0.5px solid var(--border-nav);
+      position: sticky;
       top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.6);
-      opacity: 0;
-      visibility: hidden;
-      transition: 0.2s;
-      z-index: 200;
+      z-index: 100;
+      background-color: var(--bg);
     }
-    .menu-lateral {
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-shrink: 0;
+    }
+
+    .nav-name {
+      font-family: 'Instrument Serif', serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: var(--text);
+    }
+
+    .nav-name .highlight {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    .nav-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .nav-link {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 5px 12px;
+      border-radius: 5px;
+      transition: color .2s, background .2s;
+    }
+
+    .nav-link:hover {
+      color: var(--text);
+      background: var(--hover-bg);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .nav-support {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--accent-bg);
+      border: none;
+      border-radius: 6px;
+      padding: 5px 12px;
+      text-decoration: none;
+      transition: background .2s;
+    }
+
+    .nav-support:hover {
+      background: var(--accent-bg-hover);
+    }
+
+    .nav-support-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .nav-support-text {
+      font-size: 12.5px;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 4.5px;
+      cursor: pointer;
+      padding: 4px;
+      background: transparent;
+      border: none;
+      position: fixed;
+      top: 1.1rem;
+      right: 1.25rem;
+      z-index: 300;
+      height: 27.7px;
+      justify-content: center;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 20px;
+      height: 1.5px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all .25s;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .drawer {
       position: fixed;
       top: 0;
       right: -280px;
-      width: 280px;
+      width: 260px;
       height: 100vh;
-      background: var(--fundo-card);
-      padding: 2rem 1.5rem;
-      transition: 0.2s;
-      z-index: 300;
+      background: var(--bg-raised);
+      z-index: 200;
+      transition: right .3s ease;
+      padding: 5rem 1.5rem 2rem;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 6px;
     }
-    .menu-aberto .menu-overlay {
-      opacity: 1;
-      visibility: visible;
-    }
-    .menu-aberto .menu-lateral {
+
+    .drawer.open {
       right: 0;
     }
-    .menu-fechar {
+
+    .drawer-header {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: none;
-      border: none;
-      color: var(--texto-claro);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-    .menu-titulo {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: var(--texto);
-    }
-    .menu-link {
-      color: var(--texto-claro);
-      text-decoration: none;
-      padding: 0.7rem;
-      border-radius: 0.5rem;
-      transition: 0.2s;
-    }
-    .menu-link:hover, .menu-link.ativo {
-      background: rgba(192, 132, 252, 0.1);
-      color: var(--destaque);
-    }
-    .menu-link i {
-      margin-right: 0.5rem;
-    }
-    /* Conteúdo Principal */
-    h1 {font-size: 2.3rem; font-weight: 800; margin-bottom: 0.5rem;}
-    h1 em {font-style: italic; color: var(--destaque);}
-    .subtitle {color: var(--texto-claro); font-size: 1.1rem; margin-bottom: 2rem;}
-    .actions {display: flex; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap;}
-    .btn {
-      background: var(--destaque);
-      color: #120D1C;
-      padding: 0.7rem 1.4rem;
-      border-radius: 0.5rem;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .btn:hover {background: #A855F7;}
-    .link {
-      color: var(--destaque);
-      text-decoration: none;
-      font-weight: 500;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .link:hover {text-decoration: underline;}
-    h2 {font-size: 1.3rem; font-weight: 700; margin: 3rem 0 1.2rem; color: var(--texto);}
-    .alert {
-      background: rgba(192, 132, 252, 0.08);
-      border-left: 3px solid var(--destaque);
-      padding: 1rem;
-      border-radius: 0.5rem;
-      margin-bottom: 2rem;
-    }
-    .plan {
-      background: var(--fundo-card);
-      border-radius: 0.75rem;
-      padding: 1.5rem;
-      margin-bottom: 1.25rem;
-    }
-    .plan.fav {border: 2px solid var(--destaque);}
-    .plan strong {display: block; font-size: 1.1rem; margin-bottom: 0.3rem;}
-    .price {font-size: 2rem; font-weight: 800; margin: 0.5rem 0;}
-    .price + span {color: var(--destaque); font-size: 0.9rem; text-transform: lowercase;}
-    .desc {color: var(--texto-claro); font-size: 0.95rem; margin-top: 0.5rem;}
-    .apoio {
-      background: rgba(192, 132, 252, 0.1);
-      border-radius: 0.75rem;
-      padding: 2rem;
-      margin: 3rem 0;
-      text-align: center;
-    }
-    .apoio h2 {margin: 0 0 0.8rem; font-size: 1.8rem;}
-    .apoio h2 em {color: var(--destaque); font-style: italic;}
-    .apoio p {color: var(--texto-claro);}
-    /* Grade de Links */
-    .grade-links {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .link-card {
-      background: var(--fundo-card);
-      border-radius: 0.75rem;
-      padding: 1.2rem;
-      text-decoration: none;
-      color: var(--texto);
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3.85rem;
       display: flex;
       align-items: center;
-      gap: 0.8rem;
-      transition: transform 0.2s;
+      padding: 0 1.5rem;
     }
-    .link-card:hover {transform: translateY(-2px);}
-    .link-card i {font-size: 1.8rem;}
-    .link-card .texto {display: flex; flex-direction: column;}
-    .link-card .texto span:first-child {font-weight: 600; font-size: 1rem;}
-    .link-card .texto span:last-child {font-size: 0.85rem; color: var(--texto-claro);}
-    .link-whatsapp i {color: #25d366;}
-    .link-pix i {color: #8B5CF6;}
-    .link-instagram i {color: #E4405F;}
-    .link-github i {color: #f4f4f5;}
-    .link-youtube i {color: #FF0000;}
-    footer {
-      margin-top: 4rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--borda);
-      color: var(--texto-claro);
-      font-size: 0.9rem;
+
+    .drawer-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: var(--text);
+    }
+
+    .drawer-header-line {
+      position: absolute;
+      top: 3.85rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      height: 0.5px;
+      background: var(--border);
+    }
+
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 190;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+
+    .drawer-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer-link {
+      font-size: 14px;
+      color: var(--text-pale);
+      text-decoration: none;
+      padding: 10px 12px;
+      border-radius: 6px;
+      transition: color .2s, background .2s;
+    }
+
+    .drawer-link:hover {
+      color: var(--text);
+      background: var(--hover-bg);
+    }
+
+    .drawer-support {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-bg);
+      border: none;
+      border-radius: 6px;
+      padding: 12px 14px;
+      text-decoration: none;
+      margin-top: 8px;
+    }
+
+    .drawer-support-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .drawer-support-text {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .drawer-divider {
+      height: 0.5px;
+      background: var(--border);
+      margin: 8px 0;
+    }
+
+    .hero {
       text-align: center;
+      padding: 4.5rem 2rem 3rem;
+    }
+
+    .hero-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 440px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--text);
+      color: var(--text-dark);
+      border: none;
+      padding: 10px 22px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--text-btn-hover);
+    }
+
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--text);
+      border: 0.5px solid var(--border-btn);
+      padding: 10px 22px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 400;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: var(--hover-bg);
+      border-color: var(--text-muted);
+    }
+
+    .divider {
+      height: 0.5px;
+      background: var(--border);
+      margin: 0 2rem;
+    }
+
+    .section {
+      padding: 2.5rem 2rem;
+    }
+
+    .section-label {
+      font-family: 'Instrument Serif', serif;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: var(--bg-card);
+      border-radius: 8px;
+      padding: 1.4rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .notice-icon {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      margin-top: 1px;
+    }
+
+    .notice-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    .notice-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    .notice-text a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .notice-text a:hover {
+      text-decoration: underline;
+    }
+
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
+    }
+
+    .plan-card {
+      background: var(--bg-card);
+      border: none;
+      border-radius: 10px;
+      padding: 1.5rem 1.25rem;
+      transition: background .2s;
+    }
+
+    .plan-card:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .plan-card.featured {
+      background: var(--accent-bg);
+    }
+
+    .plan-badge {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      background: var(--accent-bg);
+      padding: 2px 8px;
+      border-radius: 99px;
+      margin-bottom: 8px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    .plan-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .plan-price {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .plan-validity {
+      font-size: 11px;
+      color: var(--accent);
+      margin-bottom: 10px;
+      letter-spacing: 0.03em;
+    }
+
+    .plan-desc {
+      font-size: 12.5px;
+      color: var(--text-dim);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .thanks {
+      background: var(--accent-bg);
+      border: none;
+      border-radius: 10px;
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .thanks-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .thanks-title em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .thanks-desc {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.65;
+      font-weight: 300;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px;
+    }
+
+    .link-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg-card);
+      border: none;
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      text-decoration: none;
+      transition: background .2s;
+    }
+
+    .link-item:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .link-icon-img {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .link-label {
+      font-size: 13px;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .link-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 0.5px solid var(--hover-bg);
+      margin-top: 1rem;
+    }
+
+    .footer-text {
+      font-size: 12px;
+      color: var(--text-ghost);
+      line-height: 1.9;
+    }
+
+    .footer-text a {
+      color: var(--text-faint);
+      text-decoration: none;
+    }
+
+    .footer-text a:hover {
+      color: var(--text-pale);
+    }
+
+    .footer-credit {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    @media (max-width: 640px) {
+      .nav-center,
+      .nav-right {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .nav {
+        padding: 1.1rem 1.25rem;
+      }
+    }
+
+    @media (min-width: 641px) {
+      .hamburger {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
-
-  <!-- Cabeçalho Fixo -->
-  <header class="cabecalho">
-    <div class="cabecalho-conteudo">
-      <div class="logo">Yoshikawa <span>ESM</span></div>
-      <button class="botao-menu" onclick="abrirMenu()">☰</button>
+  <<div class="page" id="page">
+    <div class="drawer-overlay" id="overlay"></div>
+    <div class="drawer" id="drawer">
+      <div class="drawer-header">
+        <span class="drawer-title">Menu</span>
+      </div>
+      <div class="drawer-header-line"></div>
+      <a href="#planos" class="drawer-link">Planos</a>
+      <a href="#links" class="drawer-link">Links</a>
+      <a href="https://yoshikawa-bot.github.io/termos" class="drawer-link" rel="noopener noreferrer">Termos de uso</a>
+      <div class="drawer-divider"></div>
+      <a href="https://wa.me/557597029009" class="drawer-support" rel="noopener noreferrer">
+        <img src="https://yoshikawa-bot.github.io/cache/images/43d47ea3.png" alt="WhatsApp" class="drawer-support-icon">
+        <span class="drawer-support-text">Suporte</span>
+      </a>
     </div>
-  </header>
 
-  <!-- Menu Lateral -->
-  <div id="menu" class="">
-    <div class="menu-overlay" onclick="fecharMenu()"></div>
-    <nav class="menu-lateral">
-      <button class="menu-fechar" onclick="fecharMenu()">×</button>
-      <div class="menu-titulo">Menu</div>
-      <a href="#planos" class="menu-link">Planos</a>
-      <a href="#links" class="menu-link">Links</a>
-      <a href="/yoshikawa/termos" class="menu-link">Termos de uso</a>
-      <a href="https://wa.me/557597029009" target="_blank" class="menu-link ativo"><i class="fab fa-whatsapp"></i> Suporte</a>
+    <button type="button" class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav">
+      <div class="nav-logo">
+        <span class="nav-name">Yoshikawa <span class="highlight">ESM</span></span>
+      </div>
+      <div class="nav-center">
+        <a href="#planos" class="nav-link">Planos</a>
+        <a href="#links" class="nav-link">Links</a>
+        <a href="https://yoshikawa-bot.github.io/termos" class="nav-link" rel="noopener noreferrer">Termos</a>
+      </div>
+      <div class="nav-right">
+        <a href="https://wa.me/557597029009" class="nav-support" rel="noopener noreferrer">
+          <span class="nav-support-dot"></span>
+          <span class="nav-support-text">Suporte</span>
+        </a>
+      </div>
     </nav>
+
+    <div class="hero">
+      <h1 class="hero-title">Automação completa<br>para o seu <em>grupo</em></h1>
+      <p class="hero-desc">Gerencie membros, faça figurinhas, baixe músicas, jogue jogos, utilize comandos VIP e mais outras 500 funcões.</p>
+      <div class="hero-actions">
+        <a href="https://pixgg.com/mgzinhomodz" class="btn-primary" target="_blank" rel="noopener noreferrer">Alugar agora</a>
+        <a href="#planos" class="btn-outline">Ver planos</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section" id="planos">
+      <p class="section-label">Planos disponíveis</p>
+      <div class="notice">
+        <div class="notice-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="notice-text">
+          Após realizar o pagamento no valor do serviço escolhido, envie o comprovante para o suporte via <a href="https://wa.me/557597029009" rel="noopener noreferrer">WhatsApp</a>. O acesso é liberado logo após a confirmação.
+        </div>
+      </div>
+      <div class="plans">
+        <div class="plan-card featured">
+          <div class="plan-badge">FAVORITO</div>
+          <div class="plan-name">Aluguel do bot</div>
+          <div class="plan-price">R$14,99</div>
+          <div class="plan-validity">mensal</div>
+          <div class="plan-desc">Adicione o bot em 1 grupo com VIP ilimitado para o contratante.</div>
+        </div>
+        <div class="plan-card">
+          <div class="plan-name">Bot próprio</div>
+          <div class="plan-price">R$24,99</div>
+          <div class="plan-validity">mensal</div>
+          <div class="plan-desc">Conecte o bot a um número seu e adicione onde quiser, sendo dono completo.</div>
+        </div>
+        <div class="plan-card">
+          <div class="plan-name">Status VIP</div>
+          <div class="plan-price">R$1,99</div>
+          <div class="plan-validity">mensal</div>
+          <div class="plan-desc">Acesso a comandos e funções exclusivas via !menuvip.</div>
+        </div>
+        <div class="plan-card">
+          <div class="plan-name">500k Moedas</div>
+          <div class="plan-price">R$1,00</div>
+          <div class="plan-validity">permanente</div>
+          <div class="plan-desc">Quinhentas mil moedas adicionadas direto ao seu saldo em !moedas.</div>
+        </div>
+      </div>
+      <div class="thanks">
+        <div class="thanks-title">Obrigado por <em>apoiar</em> o projeto</div>
+        <p class="thanks-desc">Cada apoio contribui diretamente para manter o bot ativo e em constante evolução. Isso significa muito para nós.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section" id="links">
+      <p class="section-label">Links e contato</p>
+      <div class="links-grid">
+        <a href="https://wa.me/557597029009" class="link-item" rel="noopener noreferrer">
+          <img src="https://yoshikawa-bot.github.io/cache/images/43d47ea3.png" alt="WhatsApp" class="link-icon-img">
+          <div>
+            <div class="link-label">Suporte</div>
+            <div class="link-sub">WhatsApp</div>
+          </div>
+        </a>
+
+        <a href="https://pixgg.com/mgzinhomodz" class="link-item" target="_blank" rel="noopener noreferrer">
+          <img src="https://yoshikawa-bot.github.io/cache/images/e5e9381b.png" alt="PixGG" class="link-icon-img">
+          <div>
+            <div class="link-label">Alugar / Apoiar</div>
+            <div class="link-sub">pixgg.com</div>
+          </div>
+        </a>
+
+        <a href="https://www.instagram.com/mg.zx7yy" class="link-item" target="_blank" rel="noopener noreferrer">
+          <img src="https://yoshikawa-bot.github.io/cache/images/c47a87a7.png" alt="Instagram" class="link-icon-img">
+          <div>
+            <div class="link-label">Instagram</div>
+            <div class="link-sub">@mg.zx7yy</div>
+          </div>
+        </a>
+
+        <a href="https://github.com/mgzinhomodz" class="link-item" target="_blank" rel="noopener noreferrer">
+          <img src="https://yoshikawa-bot.github.io/cache/images/4cedbc84.png" alt="GitHub" class="link-icon-img">
+          <div>
+            <div class="link-label">GitHub</div>
+            <div class="link-sub">mgzinhomodz</div>
+          </div>
+        </a>
+
+        <a href="https://m.youtube.com/@yoshikawa-bot" class="link-item" target="_blank" rel="noopener noreferrer">
+          <img src="https://yoshikawa-bot.github.io/cache/images/2edc4be0.png" alt="YouTube" class="link-icon-img">
+          <div>
+            <div class="link-label">YouTube</div>
+            <div class="link-sub">@yoshikawa-bot</div>
+          </div>
+        </a>
+
+        <a href="https://whatsapp.com/channel/0029Vb8Fo4Q3bbVBGI4Ke513" class="link-item" target="_blank" rel="noopener noreferrer">
+          <img src="https://yoshikawa-bot.github.io/cache/images/43d47ea3.png" alt="Canal WhatsApp" class="link-icon-img">
+          <div>
+            <div class="link-label">Canal</div>
+            <div class="link-sub">WhatsApp</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p class="footer-text">
+        Yoshikawa ESM · Desenvolvida por <a href="https://github.com/mgzinhomodz" rel="noopener noreferrer"><span class="footer-credit">@mgzinhomodz</span></a><br>
+        <a href="https://yoshikawa-bot.github.io/termos" rel="noopener noreferrer">Termos de uso</a> · <a href="https://akyronhost.com/" target="_blank" rel="noopener noreferrer">Akyron Host</a> · <a href="mailto:yoshikawa_bot@proton.me">yoshikawa_bot@proton.me</a>
+      </p>
+    </div>
   </div>
 
-  <!-- Conteúdo -->
-  <main>
-    <h1>Automação completa<br>para o seu <em>grupo</em></h1>
-    <p class="subtitle">Gerencie membros, faça figurinhas, baixe músicas, jogue jogos, utilize comandos VIP e mais outras 500 funções.</p>
-    <div class="actions">
-      <a href="#planos" class="btn"><i class="fas fa-shopping-cart"></i> Alugar agora</a>
-    </div>
-
-    <h2 id="planos">Planos disponíveis</h2>
-    <div class="alert">
-      Após realizar o pagamento no valor do serviço escolhido, envie o comprovante para o suporte via WhatsApp. O acesso é liberado logo após a confirmação.
-    </div>
-
-    <div class="plan fav">
-      <strong>Aluguel do Bot</strong>
-      <div class="price">R$ 14,99</div>
-      <span>mensal</span>
-      <div class="desc">Adicione o bot em 1 grupo com VIP ilimitado para o contratante.</div>
-    </div>
-
-    <div class="plan">
-      <strong>Bot próprio</strong>
-      <div class="price">R$ 24,99</div>
-      <span>mensal</span>
-      <div class="desc">Conecte o bot a um número seu e adicione onde quiser, sendo dono completo.</div>
-    </div>
-
-    <div class="plan">
-      <strong>Status VIP</strong>
-      <div class="price">R$ 1,99</div>
-      <span>mensal</span>
-      <div class="desc">Acesso a comandos e funções exclusivas via !menuvip.</div>
-    </div>
-
-    <div class="plan">
-      <strong>500k Moedas</strong>
-      <div class="price">R$ 1,00</div>
-      <span>permanente</span>
-      <div class="desc">Quinhentas mil moedas adicionadas direto ao seu saldo em !moedas.</div>
-    </div>
-
-    <div class="apoio">
-      <h2>Obrigado por <em>apoiar</em> o projeto</h2>
-      <p>Cada apoio contribui diretamente para manter o bot ativo e em constante evolução. Isso significa muito para nós.</p>
-    </div>
-
-    <h2 id="links">Links e contato</h2>
-    <div class="grade-links">
-      <a href="https://wa.me/557597029009" target="_blank" class="link-card link-whatsapp">
-        <i class="fab fa-whatsapp"></i>
-        <div class="texto">
-          <span>Suporte</span>
-          <span>WhatsApp</span>
-        </div>
-      </a>
-      <a href="https://pixgg.com/mgzinhomodz" target="_blank" class="link-card link-pix">
-        <i class="fas fa-credit-card"></i>
-        <div class="texto">
-          <span>Alugar / Apoiar</span>
-          <span>pixgg.com/mgzinhomodz</span>
-        </div>
-      </a>
-      <a href="https://www.instagram.com/mg.zx7yy" target="_blank" class="link-card link-instagram">
-        <i class="fab fa-instagram"></i>
-        <div class="texto">
-          <span>Instagram</span>
-          <span>@mg.zx7yy</span>
-        </div>
-      </a>
-      <a href="https://github.com/mgzinhomodz" target="_blank" class="link-card link-github">
-        <i class="fab fa-github"></i>
-        <div class="texto">
-          <span>GitHub</span>
-          <span>mgzinhomodz</span>
-        </div>
-      </a>
-      <a href="https://whatsapp.com/channel/0029Vb8Fo4Q3bbVBGI4Ke513" target="_blank" class="link-card link-youtube">
-        <i class="fas fa-bullhorn"></i>
-        <div class="texto">
-          <span>Canal WhatsApp</span>
-          <span>Yoshikawa ESM</span>
-        </div>
-      </a>
-    </div>
-  </main>
-
-  <footer>
-    © 2026 Yoshikawa ESM — @mgzinhomodz<br>
-    Todos os direitos reservados.
-  </footer>
-
   <script>
-    function abrirMenu() {
-      document.getElementById('menu').classList.add('menu-aberto');
-      document.body.style.overflow = 'hidden';
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('overlay');
+    const hamburger = document.getElementById('hamburger');
+
+    function openDrawer() {
+      drawer.classList.add('open');
+      overlay.classList.add('open');
+      hamburger.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
     }
-    function fecharMenu() {
-      document.getElementById('menu').classList.remove('menu-aberto');
-      document.body.style.overflow = 'auto';
+
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      overlay.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
     }
+
+    function toggleDrawer() {
+      drawer.classList.contains('open') ? closeDrawer() : openDrawer();
+    }
+
+    hamburger.addEventListener('click', toggleDrawer);
+    overlay.addEventListener('click', closeDrawer);
+
+    drawer.querySelectorAll('.drawer-link').forEach(link => {
+      link.addEventListener('click', closeDrawer);
+    });
   </script>
 </body>
-  </html>
-  
+</html>
